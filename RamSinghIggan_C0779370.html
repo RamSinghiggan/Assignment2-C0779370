@@ -1,0 +1,83 @@
+<html>
+<font size="8" color="green">Final test lab</font><br>
+<div id="input">
+<br> Number of rows: <input type="number" id="t1" /><br>
+<br> Number of cols: <input type="number" id="t2" /><br><br>
+
+<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+</div>
+<button id="b2" onclick="appendColumn()">Add Column</button>
+
+<button id="b3" onclick="appendRow()">Add Row</button>
+
+<script language="javascript">
+
+    function generateTable() {
+        // get values from input elements
+        var row = document.getElementById("t1").value;
+        var colm = document.getElementById("t2").value;
+        var myTableDiv = document.getElementById("myTable");
+
+        // create Table
+
+        var table = document.createElement('Table');
+        table.border = '1';
+        table.setAttribute("id", "myTablee");
+        var tableBody = document.createElement('tbody');
+        table.appendChild(tableBody);
+
+        for (var i = 0; i < row; i++) {
+            var tr = document.createElement('Tr');
+            tableBody.appendChild(tr);
+
+            for (var j = 0; j < colm; j++) {
+                var td = document.createElement('Td');
+                td.width = '100';
+                td.appendChild(document.createTextNode("row , col"));
+                tr.appendChild(td);
+            }
+          }
+          myTableDiv.appendChild(table);
+
+
+           // this is to hide the input elements
+           document.getElementById("input").style.visibility = "hidden";
+    }
+
+
+  function appendRow() {
+    var tbl = document.getElementById('myTablee'), // table reference
+        row = tbl.insertRow(tbl.rows.length),      // append table row
+        i;
+    // insert table cells to the new row
+    for (i = 0; i < tbl.rows[0].cells.length; i++) {
+        createCell(row.insertCell(i), "new row ", 'row');
+    }
+}
+ 
+// create DIV element and append to the table cell
+function createCell(cell, text, style) {
+    var div = document.createElement('myTable'), // create DIV element
+        txt = document.createTextNode(text); // create text node
+    div.appendChild(txt);                    // append text node to the DIV
+    div.setAttribute('class', style);        // set DIV class attribute
+    div.setAttribute('className', style);    // set DIV class attribute for IE (?!)
+    cell.appendChild(div);                   // append DIV to the table cell
+  
+}
+
+function appendColumn() {
+    var tbl = document.getElementById('myTablee'), // table reference
+        i;
+       
+    // open loop for each row and append cell
+    for (i = 0; i < tbl.rows.length; i++) {
+        
+        createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), "new col ", 'col');
+    }
+}
+</script>
+
+<div id="myTable"></div>
+
+</html>
